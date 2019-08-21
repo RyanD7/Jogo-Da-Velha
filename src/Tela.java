@@ -1,13 +1,17 @@
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class Tela extends JFrame implements ActionListener{
 
     JButton[][] botoes = new JButton [3][3];
     int jogador = 1;
+            Tabuleiro tabuleiro = new Tabuleiro();
+            
         public Tela() {
         super("Jogo da Velha");
         this.setVisible(true);
@@ -44,5 +48,10 @@ public class Tela extends JFrame implements ActionListener{
             this.jogador = 1;
         }
         botoes[x][y].setText(texto);
+        botoes[x][y].setFont(new Font("Dialog", 0, 75));
+        tabuleiro.adicionarJogada(x, y, texto);
+        if(tabuleiro.verificarVencedor(texto)){
+            JOptionPane.showMessageDialog(null, "Venceu o Jogador: " + texto);
+        }
     }
 }
